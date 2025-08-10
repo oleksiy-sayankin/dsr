@@ -1,0 +1,11 @@
+\appendix
+\renewcommand{\appendixname}{Додаток}
+\addtocontents{toc}{\def\protect\cftchappresnum{\appendixname{ }}
+\setlength{\cftchapnumwidth}{\widthof{\cftchapfont\appendixname~Ш\cftchapaftersnum}}%
+}
+
+\renewcommand\thechapter{\Asbuk{chapter}}
+
+\chapter{Лістінг програмного коду} \label{AppendixA}
+
+Test

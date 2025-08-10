@@ -1,0 +1,29 @@
+\geometry{a4paper,top=2cm,bottom=2cm,left=2.5cm,right=1cm}              % page margins
+
+\setmainlanguage[babelshorthands=true]{russian}                         % disser language
+\setotherlanguage{english}
+\defaultfontfeatures{Ligatures=TeX,Mapping=tex-text}
+\setmainfont{Times New Roman}
+\newfontfamily\cyrillicfont{Times New Roman}
+\setsansfont{Arial}
+\newfontfamily\cyrillicfontsf{Arial}
+\setmonofont{Courier New}
+\newfontfamily\cyrillicfonttt{Courier New}
+
+\linespread{1.5}                                                        % line interval
+\setlength{\parindent}{3.5em}                                           % paragraph indent
+
+% links colors
+\definecolor{linkcolor}{rgb}{0,0,0}
+\definecolor{citecolor}{rgb}{0,0.6,0}
+\definecolor{urlcolor}{rgb}{0,0,1}
+
+% links configuration
+\hypersetup{
+    linktocpage=true,           % links in TOC
+    plainpages=false,           % Forces page anchors to be named by the Arabic form  of the page number, rather than the formatted form
+    colorlinks,                 % do not show rectange in links
+    linkcolor={linkcolor},      % set ref color
+    citecolor={citecolor},      % set quote color
+    urlcolor={urlcolor},        % set url color
+}

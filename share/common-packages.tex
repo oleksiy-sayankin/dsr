@@ -1,0 +1,19 @@
+\newlength{\curtextsize}
+
+\makeatletter
+\setlength{\curtextsize}{\f@size pt}    % assign value to curtextsize
+\makeatother
+
+\usepackage{geometry}                   % format margins
+\usepackage{polyglossia}                % use cyryllic fonts
+\usepackage{indentfirst}                % red lines at paragraph
+\usepackage{tocloft}                    % TOC formatting
+\usepackage{titlesec}
+\usepackage{calc}
+%\usepackage{interfaces-titlesec}       %FIXME Why to delete? Causes ! Package etoolbox Error: \scr@load@hook undefined.
+\usepackage{fancyhdr}                   % page number formatting
+\usepackage[linktocpage=true]{hyperref} % links in TOC to pages
+\usepackage{colortbl}                   % use colors
+\usepackage{gensymb}                    % Celsius degree here
+\usepackage{amssymb,amsmath,amsfonts,amscd,amsthm}  % math
+\usepackage{mathtools}

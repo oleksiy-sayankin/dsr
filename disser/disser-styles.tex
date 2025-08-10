@@ -1,0 +1,57 @@
+\renewcommand{\cftchapdotsep}{\cftdotsep}               % add points in content
+
+% Format chapter in the TOC (Table Of Contents)
+
+\renewcommand{\cfttoctitlefont}{\bfseries\MakeUppercase}                    % format TOC name
+\setlength{\cftbeforetoctitleskip}{-1.5\curtextsize}                        % remove empty lines before TOC name
+
+
+\renewcommand\cftchapaftersnum{.\ }                                         % add point and space after number in the chapter ГЛАВА 1. Текст
+\renewcommand\cftsecaftersnum{.\ }
+\renewcommand\cftsubsecaftersnum{.\ }
+\cftsetrmarg{2.55em plus1fil}                                               % stop hyphenation in TOC
+
+\setlength{\cftsecnumwidth}{3em}                                            % champer. distance between number and text: 1.2.<-->Метод
+\setlength{\cftsubsecnumwidth}{4em}                                         % subchapter
+
+\renewcommand{\cftchappresnum}{\chaptername\ }                              % add Глава to TOC items
+\setlength{\cftchapnumwidth}{\widthof{\cftchapfont\cftchappresnum\thechapter\cftchapaftersnum~II}}  % set width between Глава 1 and text FIXME: remove ~II
+
+
+% Format chapter in the text
+
+\titleformat{\chapter}[display]
+    {\filcenter\bfseries}                                                   % bold font
+    {\MakeUppercase{\chaptertitlename} \thechapter}
+    {0em}
+    {\MakeUppercase}                                                        % formatting applied just to title
+
+\titleformat{\section}[block]
+    {\bfseries}%
+    {\thesection\cftchapaftersnum}
+    {0em}
+    {}%
+
+\titleformat{\subsection}[block]
+    {\bfseries}%
+    {\thesubsection\cftchapaftersnum}
+    {0em}
+    {}%
+
+\titlespacing{\chapter}{0em}{-1.5em}{5em}                                   % remove empty lines before chapter
+
+% Format LOF (List Of Figures)
+\renewcommand{\cftloftitlefont}{\bfseries\MakeUppercase}
+\setlength{\cftbeforeloftitleskip}{-1.5\curtextsize}                        % remove empty lines before LOF
+
+% Format LOT (List Of Tables)
+\renewcommand{\cftlottitlefont}{\bfseries\MakeUppercase}
+\setlength{\cftbeforelottitleskip}{-1.5\curtextsize}                        % remove empty lines before LOT
+
+\makeatletter
+\let\ps@plain\ps@fancy                                                      % Use the same page style at first chpater page
+\makeatother
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}                                                            % right head position
+\renewcommand{\headrulewidth}{0pt}                                          % remove line after page number

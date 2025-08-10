@@ -1,0 +1,9 @@
+\makeatletter
+\renewcommand\tableofcontents{%
+  \null\hfill\textbf{\MakeUppercase\contentsname}\hfill\null\par
+  \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+  \@starttoc{toc}%
+}
+\makeatother
+
+\tableofcontents

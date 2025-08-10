@@ -1,0 +1,875 @@
+\chapter{Математичне моделювання прямих задач динаміки нелінійних систем} \label{ch:chapt2}
+
+В розділі ми розглянули питання побудови середньо квадратичних наближень (якщо вони існують) до розв'язків нелінійних
+в малому прямих задач заданих сумою лінійного диференціального оператора та нелінійного збурення в умовах неповноти
+інформації.
+Нелінійне збурення представлене поліномом зі сталими коефіцієнтами від шуканої функції та її часткових
+похідних по координатах.
+
+Наближення до розв'язків прямої нелінійної задачі ми побудували на базі методики розв'язання квазілінійних задач
+(метод збурень) описаної у першому розділі даної дисертаційної роботи.
+
+Середньо квадратичні наближення (якщо вони існують) до розв'язків допоміжних прямих лінійних задач ми
+побудували на основі методики середньоквадратичного обернення систем функціональних та інтегральних співвідношень
+також описаної у першому розділі роботи.
+
+\section{Задача моделювання динаміки нелінійної в малому системи з розподіленими параметрами у необмежених
+просторово-часових областях} \label{sec:sect2_1}
+
+Розглянемо систему, яка описується диференціальним рівнянням вигляду
+\begin{equation}
+    \label{eq:small_parameter_common_system}
+L(\partial_x^2, \partial_t)y(s) + \varepsilon P(y(s), \partial_x y(s), \partial_x^2 y(s)) = u(s), s\in S_\infty^\infty
+\end{equation}
+
+де $ s=(x, t), x = (x_1,\dots,x_n),
+\partial_x=\left(\frac{\partial}{\partial x_1},\dots, \frac{\partial}{\partial x_n}\right),
+\partial^2_x=\left(\frac{\partial^2}{\partial x^2_1},\dots, \frac{\partial^2}{\partial x^2_n}\right),\\
+n \in \mathbb{N}, \enspace
+L(\partial_x^2, \partial_t)
+$ -- лінійний диференціальний оператор з постійними коєфіціентеми при похідних
+$
+L(\partial_x^2, \partial_t)=\sum\limits_{ \substack{i,j=1\\ i\neq j}}\left(l_{1i} \frac{\partial^2}{\partial x^2_i} +
+l_{2i}\frac{\partial^2}{\partial x_{1i}
+\partial x_{1j}} + l_{3i} \frac{\partial}{\partial x_i} \right) + l_4 \frac{\partial}{\partial t}
+$, \enspace
+$l_{1i}$, $l_{2i}$, $l_{3i}$, $l_{4}\in\mathbb{R}$,
+\enspace $P(y(s), \partial_x y(s), \partial_x^2 y(s))$ -- многочлен своїх аргументів з постійними коефіцієнтами при
+похідних $\varepsilon$ -- малий параметр, $\varepsilon\in[0;\enspace0.1]$, $u(s)\in\mathbb{C}$ -- задана функція,
+визначена в $S_\infty^\infty$, \enspace$S_\infty^\infty=S_\infty \times T_\infty$, \enspace
+$S_\infty = \mathbb{R}^n$, \enspace$T_\infty=
+(-\infty;T]$, $T\in\mathbb{R_+}$.
+
+\emph{Наближеним з точністю $\eta$ розв'язком} (якщо він існує) системи \eqref{eq:small_parameter_common_system}, стан
+якої визначається у необмеженій просторово-часовій області, ми будемо називати таку функцію $y(s)$,
+$s\in S_{\infty}^{\infty}$ що
+
+\begin{equation}
+    \label{eq:small_parameter_common_system_solution}
+    \int\limits_{\infty}\parallel L(\partial_x^2, \partial_t)y(s) + \varepsilon P(y(s), \partial_x y(s), \partial_x^2 y(s))
+    - u (s) \parallel^{2}ds \leq \eta^2.
+\end{equation}
+
+Знайдемо $y(s)$. Нехай
+
+\[
+y(s)=y^{(0)}(s) + \varepsilon y^{(1)}(s) + \varepsilon^2 y^{(2)}(s) + \dots
+\]
+
+де $y^{(0)}(s), y^{(1)}(s), y^{(2)}(s),\dots\in\mathbb{C}^{n}$ -- довільні функції, визначені в $S_{\infty}^{\infty}$.
+Підставимо $y(s)$ у вигляді ряду в початкове рівняння~\eqref{eq:small_parameter_common_system}. Маємо
+
+\begin{gather*}
+    L(\partial_x^2, \partial_t)y(s) + \varepsilon P(y(s), \partial_x y(s), \partial_x^2 y(s)) = u(s) \Leftrightarrow\\
+    L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) +
+    \varepsilon \left\{ P_{1}
+                    \left[
+                       y^{(0)}(s), \partial_x y^{(0)}(s), \partial_x^2 y^{(0)}(s)
+                    \right] +
+                    L(\partial_x^2, \partial_t)y^{(1)}(s)
+                \right\} +\\
+    + \varepsilon^{2} \left\{ P_{2}
+\left[
+y^{(0)}(s), \partial_x y^{(0)}(s), \partial_x^2 y^{(0)}(s),
+y^{(1)}(s), \partial_x y^{(1)}(s), \partial_x^2 y^{(1)}(s)
+\right] +
+L(\partial_x^2, \partial_t)y^{(2)}(s)
+\right\} +\\
+    \dots\\
+    + \varepsilon^{q} \left\{ P_{q}
+\left[
+\underbrace{
+    ,\dots,
+    y^{(q-1)}(s), \partial_x y^{(q-1)}(s), \partial_x^2 y^{(q-1)}(s)
+}_{3q}
+\right]
++ L(\partial_x^2, \partial_t)y^{(q)}(s)
+\right\} + \dots = 0\\
+\end{gather*}
+
+де $P_{1}[\cdot]$, $P_{2}[\cdot]$, $P_{q}[\cdot]$ -- деякі многочлени, $q=1,2,\dots$.
+Оскільки послідовність степенів $\varepsilon$ лінійно незалежна, то коефіцієнт при кожній степені обертається в нуль
+незалежно.
+Отже, можемо вимагати, щоб
+
+\begin{gather*}
+    L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0,\\
+    L(\partial_x^2, \partial_t)y^{(1)}(s) = -P_{1}
+    \left[
+    y^{(0)}(s), \partial_x y^{(0)}(s), \partial_x^2 y^{(0)}(s)
+    \right], \\
+    L(\partial_x^2, \partial_t)y^{(2)}(s) = -P_{2}
+    \left[
+    y^{(0)}(s), \partial_x y^{(0)}(s), \partial_x^2 y^{(0)}(s),
+    y^{(1)}(s), \partial_x y^{(1)}(s), \partial_x^2 y^{(1)}(s)
+    \right],\\
+    \dots\\
+    L(\partial_x^2, \partial_t)y^{(q)}(s) = -P_{q}
+    \left[
+        \underbrace{
+            ,\dots,
+            y^{(q-1)}(s), \partial_x y^{(q-1)}(s), \partial_x^2 y^{(q-1)}(s)
+        }_{3q}
+        \right].
+\end{gather*}
+
+Позначимо $y^{q}(s)=y_{\infty}^{q}(s)$.
+Розглянемо рівняння $L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0$.
+Відомо, якщо $y(s)\in\mathbb{C}^{n}$, то функію $y(s)$ можна представити у вигляді
+
+\[
+    y(s) = \int\limits_{S_{\infty}^{\infty}}^{}y(s')\delta(s-s')ds',
+\]
+
+де $ds'=dx_{1}'\dots dx_{n}'dt'$, $\delta(s-s')= \prod\limits_{k=1}^{n}\delta(x_{k} - x_{k}')\delta(t-t')$,
+$\delta(\cdot)$ -- дельта функція Дірака, яку ми запишемо у вигляді
+\begin{gather*}
+    \delta(x_{k} - x'_{k})=\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}\exp(i\lambda_{k}(x_{k}-x'_{k}))d\lambda_{k},\\
+    \delta(t - t')=\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}\exp(i\mu(t-t'))d\mu.\\
+\end{gather*}
+Тоді
+\[
+    y^{(0)}_{\infty}(0)=\int\limits_{S_{\infty}^{\infty}}G(s-s')ds'.
+\]
+
+де $G(s-s')$ -- функція Гріна для необмеженій просторово-часовій області, для рівняння
+$L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0$.
+Відомо, що
+
+\begin{gather*}
+    G(x-x', t-t') = \frac{1}{(2\pi)^{n+1}}\int\limits_{S_\infty^\infty}Q(-\lambda^2, i\mu)\prod_{k=1}^n\exp
+    (i\lambda_k(x_k - x'_k))\exp(i\mu(t-t'))d\lambda d\mu,\\
+    \lambda=(\lambda_{1},\dots,\lambda_{n}),
+\end{gather*}
+де $i$ -- уявна одиниця, $\lambda_{1},\dots,\lambda_{n},\mu\in\mathbb{R},s=(x,t),x=(x_{1},\dots,x_{n}), n\in\mathbb{N}$.
+Розглянемо рівняння $L(\partial_x^2, \partial_t)y^{(1)}(s)=-P_{1}
+\left[
+y^{(0)}(s), \partial_x y^{(0)}(s), \partial_x^2 y^{(0)}(s)
+\right]$.
+Оскільки $y^{(0)}(s)=y^{(0)}_{\infty}(s)$ вже відомо, то
+\begin{gather*}
+    L(\partial_x^2, \partial_t)y^{(1)}(s)=-P_{1}
+    \left[
+    y_{\infty}^{(0)}(s), \partial_x y_{\infty}^{(0)}(s), \partial_x^2 y_{\infty}^{(0)}(s)
+    \right].
+\end{gather*}
+Отже,
+\[
+    y_{\infty}^{(1)}(s) = -\int\limits_{S_\infty^\infty}G(s-s')P_{1}
+    \left[
+    y_{\infty}^{(0)}(s'), \partial_x y_{\infty}^{(0)}(s'), \partial_x^2 y_{\infty}^{(0)}(s')
+    \right]ds'.
+\]
+Аналогічно
+\begin{gather*}
+    y_{\infty}^{(2)}(s) = -\int\limits_{S_\infty^\infty}G(s-s')\times\\
+    \times P_{2}
+    \left[
+    y_{\infty}^{(0)}(s'), \partial_x y_{\infty}^{(0)}(s'), \partial_x^2 y_{\infty}^{(0)}(s'),
+    y_{\infty}^{(1)}(s'), \partial_x y_{\infty}^{(1)}(s'), \partial_x^2 y_{\infty}^{(0)}(s')
+    \right]ds'\\
+    \dots\\
+    y_{\infty}^{(q)}(s)=-\int\limits_{S_\infty^\infty}G(s-s')\times\\
+    \times P_{2}
+    \left[
+        \underbrace{
+            ,\dots,
+            y^{(q-1)}(s), \partial_x y^{(q-1)}(s), \partial_x^2 y^{(q-1)}(s)
+        }_{3q}
+    \right]ds'\\
+    \dots
+\end{gather*}
+Остаточно
+\begin{gather*}
+    y(s)=y_{\infty}^{(0)}(s) + \varepsilon y_{\infty}^{(1)}(s) + \varepsilon^2 y_{\infty}^{(2)}(s) + \dots
+\end{gather*}
+
+\textbf{Висновки}.
+Розглянуто нелінійну систему, яка функціонує у нескінчених просторово-часових областях.
+Отримано наближення нелінійної системи через нескінчену кількість лінійних систем.
+Для кожної з лінійних систем побудовано функції Гріна.
+Проведено моделювання розв'язків лінійних систем та отримано розв'язок початкової системи у вигляді ряду.
+
+\section{Задача моделювання динаміки нелінійної в малому системи з розподіленими параметрами у обмеженій
+часовій області} \label{sec:sect2_2}
+
+Розглянемо систему, яка описується диференціальним рівнянням з початковою умовою, заданою на всій області
+$S_{\infty}$
+
+\begin{equation}
+    \label{eq:small_parameter_common_system_with_s_area}
+    \left\{
+    \begin{alignedat}{2}
+    L(\partial_x^2, \partial_t)y(s) + \varepsilon P(y(s), \partial_x y(s), \partial_x^2 y(s)) = u(s), s\in S_\infty^T, \\
+    L^{0}(\partial_{t})y(x,0) = Y^{0}(x),x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0,
+    \end{alignedat}
+    \right.
+\end{equation}
+де $s=(x,t)$, $x=(x_{1},\dots,x_{n})$, $S_{\infty}^{T}=S_{\infty}\times T_{0}$, $\partial_{x}=\left(
+\frac{\partial}{\partial x_{1}}, \dots, \frac{\partial}{\partial x_{n}} \right)$,
+$\partial^{2}_{x}=\left(\frac{\partial^{2}}{\partial x^{2}_{1}}, \dots, \frac{\partial^{2}}{\partial x^{2}_{n}} \right)$,
+$L(\partial_x^2, \partial_t)$, $L^{0}(\partial_{t})$ -- лінійні диференціальні оператори з постійними коефіцієнтами при похідних,
+$
+L(\partial_x^2, \partial_t)=\sum\limits_{ \substack{i,j=1\\ i\neq j}}\left(l_{1i} \frac{\partial^2}{\partial x^2_i} +
+l_{2i}\frac{\partial^2}{\partial x_{1i}
+    \partial x_{1j}} + l_{3i} \frac{\partial}{\partial x_i} \right) + l_4 \frac{\partial}{\partial t}
+$, $l_{1i}$, $l_{2i}$, $l_{3i}$, $l_{4}\in\mathbb{R}$, $L^{0}(\partial_{t})=l_{1}^{0}\frac{\partial}{\partial t}$,
+$l_{1}^{0}\in\mathbb{R}$, $P(y(s), \partial_x y(s), \partial_x^2 y(s))$ -- многочлен  своїх аргументів з постійними
+коефіцієнтами при похідних,  $\varepsilon$ – малий параметр, $\varepsilon\in [0; 0.01]$,
+$Y_{0}(x)\in\mathbb{C}^n$ -- задана функція, визначена в $\bigcup\limits_{r=1}^{R_{0}}$;
+$S_{0r}\subseteq S_{0}$; $S_{0}$ -- зв'язна замкнена множина; $S_{0r}\cap S_{ok} = \varnothing$; $r\neq k$;
+$r,k = 1,\dots,R_{0}$; $R_{0}\in\mathbb{N}$; $u(s)\in\mathbb{C}^n$ -- задана функція, визначена в
+$S_{\infty}^{T}$, $S_{\infty} = \mathbb{R}$, $k,n\in\mathbb{N}$, $T_{0}=[0;T]$, $T\in\mathbb{R}_{+}$.
+Використовуючи заміну
+$$y(s)=y^{(0)}(s)+\varepsilon y^{(1)}(s) + \varepsilon^{2}y^{(2)}(s)+\dots$$
+отримаємо
+\begin{gather*}
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y(s) - u(s)
+        + \varepsilon \left\{ P_{1}\left[y^{(0)}(s), \partial_x y^{(0)}(s), \partial_x^2 y^{(0)}(s)\right]
+        + L(\partial_x^2, \partial_t)y^{(1)}(s) \right\} + \\
+        \dots\\
+        + \varepsilon^{q} \left\{ P_{q}
+        \left[
+            \underbrace{
+                ,\dots,
+                y^{(q-1)}(s), \partial_x y^{(q-1)}(s), \partial_x^2 y^{(q-1)}(s)
+            }_{3q}
+            \right]
+        + L(\partial_x^2, \partial_t)y^{(q)}(s)
+        \right\} + \dots = 0,\\
+        L^{0}(\partial_t)y^{(0)}(x, 0) + \varepsilon L^{0}(\partial_t)y^{(1)}(x, 0)+\dots+
+        \varepsilon^q L^{0}(\partial_t)y^{(1)}(x, 0)+\dots = Y^{0}(x),
+    \end{alignedat}
+    \right.
+\end{gather*}
+де $P_{1}[\cdot], P_{2}[\cdot], \dots,P_{q}[\cdot],\dots$ -- деякі многочлени; $q=1,2,\dots$.
+Отже,
+\begin{gather*}
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0, s\in S_\infty^T,\\
+        L^{0}(\partial_{t})y^{(0)}(x,0) = Y^{0}(x),x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0,
+    \end{alignedat}
+    \right.\\
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y^{(1)}(s) = -P_{1}\left[y^{(0)}(s), \partial_x y^{(0)}(s), \partial_x^2 y^{(0)}(s)\right], s\in S_\infty^T,\\
+        L^{0}(\partial_{t})y^{(1)}(x,0) = Y^{0}(x),x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0,
+    \end{alignedat}
+    \right.\\
+    \dots\\
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y^{(q)}(s) =
+        -P_{q}
+        \left[
+            \underbrace{
+                ,\dots,
+                y^{(q-1)}(s), \partial_x y^{(q-1)}(s), \partial_x^2 y^{(q-1)}(s)
+            }_{3q}
+            \right], s\in S_\infty^T,\\
+        L^{0}(\partial_{t})y^{(q)}(x,0) = Y^{0}(x),x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0,
+    \end{alignedat}
+    \right.
+\end{gather*}
+
+Розглянемо систему
+
+\begin{gather*}
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0, s\in S_\infty^T,\\
+        L^{0}(\partial_{t})y^{(0)}(x,0) = Y^{0}(x),x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0,
+    \end{alignedat}
+    \right.
+\end{gather*}
+
+Нехай $y^{(0)}(s)=y_{\infty}^{(0)}(s) + y_{0}^{(0)}(s)$,
+де $y_{0}^{(0)}(s)$ -- функція, яка виражається через фіктивні динамічні збурення
+$u^{(0)}_{0}(s')$,
+$s=(x', t')$,
+$s'\in S_{\infty}^{\infty 0} = S_{\infty} \times (T_{\infty}\textbackslash T_{0})$,
+$y_{0}^{(0)}(s)=\int\limits_{S_{\infty}^{\infty 0}}G(s-s')\bigg|_{s\in S_{\infty}^{T}}u_{0}^{(0)}(s')ds'$,
+$y_{\infty}^{(0)}(s)=\int\limits_{S_{\infty}^{\infty}}G(s-s')\bigg|_{s\in S_{\infty}^{T}}u_{0}^{(0)}(s')ds'$,
+$ds'=dx'dt'$,
+де $G(s-s')$ -- функція Гріна для необмеженій просторово-часовій області, для рівняння
+$L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0$.
+
+Маємо рівняння відносно $y_{0}^{(0)}$:
+
+\begin{gather*}
+L^{0}(\partial_{t})y_{\infty}^{(0)}(s) + L^{0}(\partial_{t})y_{\infty}^{(0)}(s) = Y^{0}(x),
+x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0,\Leftrightarrow\\
+    \int\limits_{S_{\infty}^{\infty 0}}L^{0}(\partial_{t})G(s-s')u_{0}^{(0)}(s')ds' =
+    Y^{0}(x)-\int\limits_{S_{\infty}^{\infty}} L^{0}(\partial_{t})G(s-s')u_{0}^{(0)}(s')ds',\\
+x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0.
+\end{gather*}
+
+Дискретизуючи по змінній $s'$, замінимо наступні інтеграли інтегральними сумами:
+
+\begin{gather*}
+\int\limits_{S_{\infty}^{\infty 0}}L^{0}(\partial_{t})G(s-s')u_{0}^{(0)}(s')ds' \approx
+\sum\limits_{\xi=1}^{\Xi} L^{0}(\partial_{t})G(s-s'_{\xi})u_{0}^{(0)}(s'_{\xi})\Delta s'_{\xi},\\
+x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0.
+\end{gather*}
+
+Отже,
+
+\begin{gather*}
+    \sum\limits_{\xi=1}^{\Xi} L^{0}(\partial_{t})G(s-s'_{\xi})\bigg|_{s'_{\xi}\in S_{\infty}^{\infty 0}}
+    u_{0}^{(0)}(s'_{\xi})\Delta s'_{\xi}
+    = Y^{0}(x) - \int\limits_{S_{\infty}^{\infty}} L^{0}(\partial_{t})G(s-s') \bigg|_{s\in S_{\infty}^{T}} u_{0}^{(0)}(s')ds'\\
+    x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0.
+\end{gather*}
+
+Дискретизуючи по змінній $s$, замінимо  рівняння  системою з $H_{0}$ лінійних алгебраїчних рівнянь.
+
+\begin{equation}
+    \begin{alignedat}{2}
+    \label{eq:small_parameter_common_system_with_s_area_summa}
+    \sum\limits_{\xi=1}^{\Xi} L^{0}(\partial_{t})G(s_{h}-s'_{\xi})\bigg|_{s'_{\xi}\in S_{\infty}^{\infty 0}}
+    u_{0}^{(0)}(s'_{\xi})\Delta s'_{\xi} =\\
+    = Y^{0}(x_{h}) - \int\limits_{S_{\infty}^{\infty}} L^{0}(\partial_{t})G(s_{h}-s') \bigg|_{s_{h}\in S_{\infty}^{T}} u_{0}^{(0)}(s')ds',\\
+    x_{h}\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0.
+    \end{alignedat}
+\end{equation}
+
+Запишемо систему ($\ref{eq:small_parameter_common_system_with_s_area_summa}$) у матричній формі
+
+\begin{gather*}
+    CU_{0}^{0}=Y_{0}^{(0)},\\
+    U_{0}^{(0)} = \left( str \left( u_{0}^{(0)}(s'_{\xi})\bigg|_{s'_{\xi}\in S_{\infty}^{\infty 0}} \right) \xi,\dots,{\Xi} \right)^{T},\\
+    Y_{0}^{(0)}=col\left(Y^{0}(x_{h}) - \int\limits_{S_{\infty}^{\infty}} L_{0}(\partial_{t})G(s_{h}-s')\bigg|_{s_{h}\in S_{\infty}
+    ^{T}}U(s')ds', x_{h}\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0 \right)\\ h=1,\dots,H_{0},\\
+    C=col\left( str\left(L^{0}(\partial_{t})G(s_{h}-s'_{\xi})\bigg|_{\substack{s_{h}\in\bigcup
+    \limits_{r=1}^{R_{0}} S_{0r}\\
+    s'_{\xi}\in S_{\infty}^{\infty 0}}} \Delta s'_{\xi} \right)\xi,\dots,{\Xi} \right)\\ h=1,\dots,H_{0}.
+\end{gather*}
+
+Отримаємо задачу псевдообернення системи лінійних алгебраїчних рівнянь.
+Позначимо $P_{1}=CC^{T}$, $P_{2}=C^{T}C$. Запишемо її розв'язок.
+
+\begin{gather*}
+    U_{0}^{(0)}\in \Omega_{U_{0}^{(0)}} = \left\{U_{0}^{(0)} : U_{0}^{(0)} = C^{T}P_{1}^{+}Y_{0}^{(0)}
+    + I_{\Xi\times\Xi}\nu -C^{T}P_{1}^{+}C\nu\right\},
+\end{gather*}
+
+або
+
+\begin{gather*}
+    U_{0}^{(0)}\in \Omega_{U_{0}^{(0)}} = \left\{U_{0}^{(0)} : U_{0}^{(0)} = P_{2}^{+}C^{T}Y_{0}^{(0)}
+    + I_{\Xi\times\Xi}\nu -P_{2}^{+}C^{T}C\nu\right\},
+\end{gather*}
+
+де $I_{\Xi\times\Xi}$ -- одинична матриця розміру $\Xi\times\Xi$, $\nu$ -- довільний вектор розміру $\Xi$,
+$P_{1}^{+}$, $P_{2}^{+}$  -- матриці псевдообернені до $P_{1}$,$P_{2}$. Похибка моделювання $\left[ \eta^{(0)} \right]^{2}$ дорівнює
+
+\begin{gather*}
+    \left[ \eta^{(0)} \right]^{2} = \left[ Y_{0}^{(0)} \right]^{T}Z\left( C^{T} \right)Y_{0}^{(0)},
+    Z\left( C^{T} \right)=I_{H_{0}\times H_{0}} - C\left( C^{T} C\right)^{+}C^{T}.
+\end{gather*}
+
+Таким чином ми знайшли $y^{(0)}(s)$. Підставляючи значення $y^{(0)}(s)$ в систему (\ref{eq:small_parameter_common_system_with_s_area_summa_iteratoin_1})
+
+\begin{equation}
+    \left\{
+    \label{eq:small_parameter_common_system_with_s_area_summa_iteratoin_1}
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y^{(1)}(s) = -P_{1}\left[ y^{0}(0), \partial_{x}
+        y^{(0)}(s), \partial_{x}^{2}y^{(0)}(s) \right], s\in S_\infty^T,\\
+        L^{0}(\partial_{t})y^{(1)}(x,0) = Y^{0}(x),x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0,
+    \end{alignedat}
+    \right.
+\end{equation}
+
+визначимо $y^{(0)}(s)$.
+В загальному випадку для системи
+
+\begin{gather*}
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y^{(q)}(s) = -P_{q}
+        \left[
+            \underbrace{
+                ,\dots,
+                y^{(q-1)}(s), \partial_x y^{(q-1)}(s), \partial_x^2 y^{(q-1)}(s)
+            }_{3q}
+            \right], s\in S_\infty^T,\\
+        L^{0}(\partial_{t})y^{(q)}(x,0) = Y^{0}(x),x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0,
+    \end{alignedat}
+    \right.
+\end{gather*}
+
+позначимо $y^{(q)}(s)=y_{\infty}^{(q)}(s) + y_{0}^{(q)}(s)$,
+де $y_{0}^{(q)}(s)$ -- функція, яка виражається через фіктивні динамічні збурення
+$u^{(q)}_{0}(s')$,
+$s'=(x', t')$,
+$s'\in S_{\infty}^{\infty 0} = S_{\infty} \times (T_{\infty}\textbackslash T_{0})$,
+$y_{q}^{(0)}(s)=\int\limits_{S_{\infty}^{\infty 0}}G(s-s')\bigg|_{s\in S_{\infty}^{T}}u_{0}^{(q)}(s')ds'$,
+$y_{\infty}^{(q)}(s)=\int\limits_{S_{\infty}^{\infty}}G(s-s')\bigg|_{s\in S_{\infty}^{T}}P_{q}\left[ \cdot \right](s')ds'$,
+$ds'=dx'dt'$.
+
+Отже,
+
+\begin{gather*}
+   \int\limits_{S_{\infty}^{\infty 0}} L^{0}(\partial_{t})G(s-s')u_{0}^{(q)}(s')ds' =
+   \int\limits_{S_{\infty}^{\infty}}
+   L^{0}(\partial_{t})G(s-s')P_{q}\left[ \cdot \right]ds',\\
+   x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0.
+\end{gather*}
+
+Аналогічно, дискретизуючи по змінній $s'$, замінимо інтеграли інтегральними сумами;
+дискретизуючи по змінній $s$, замінимо  рівняння  системою з $H_{0}$ лінійних алгебраїчних рівнянь.
+Запишемо отриману систему у матричній формі
+
+\begin{gather*}
+    CU_{0}^{q}=Y_{0}^{(q)},\\
+    C=col\left( str\left(L^{0}(\partial_{t})G(s_{h}-s'_{\xi})\bigg|_{\substack{s_{h}\in\bigcup
+    \limits_{r=1}^{R_{0}} S_{0r}\\
+    s'_{\xi}\in S_{\infty}^{\infty 0}}} \Delta s'_{\xi} \right)\xi,\dots,{\Xi} \right)\\ h=1,\dots,H_{0},\\
+    U_{0}^{(q)} = \left( str \left( u_{0}^{(q)}(s'_{\xi})\bigg|_{s'_{\xi}\in S_{\infty}^{\infty 0}} \right) \xi,\dots,{\Xi} \right)^{T},\\
+    Y_{0}^{(q)}=col\left(\int\limits_{S_{\infty}^{\infty}} L_{0}(\partial_{t})G(s_{h}-s')\bigg|_{s_{h}\in S_{\infty}
+    ^{T}}P_{q}\left[ \cdot \right]ds', x_{h}\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0 \right)\\ h=1,\dots,H_{0},\\
+\end{gather*}
+
+Позначимо $P_{1}=CC^{T}$, $P_{2}=C^{T}C$.
+Запишемо її розв'язок.
+
+\begin{gather*}
+    U_{0}^{(q)}\in \Omega_{U_{0}^{(q)}} = \left\{U_{0}^{(q)} : U_{0}^{(q)} = C^{T}P_{1}^{+}Y_{0}^{(q)}
+    + I_{\Xi\times\Xi}\nu -C^{T}P_{1}^{+}C\nu\right\},
+\end{gather*}
+
+або
+
+\begin{gather*}
+    U_{0}^{(q)}\in \Omega_{U_{0}^{(q)}} = \left\{U_{0}^{(q)} : U_{0}^{(q)} = P_{2}^{+}C^{T}Y_{0}^{(q)}
+    + I_{\Xi\times\Xi}\nu -P_{2}^{+}C^{T}C\nu\right\},
+\end{gather*}
+
+де $I_{\Xi\times\Xi}$ -- одинична матриця розміру $\Xi\times\Xi$, $\nu$ -- довільний вектор розміру $\Xi$,
+$P_{1}^{+}$, $P_{2}^{+}$  -- матриці псевдообернені до $P_{1}$,$P_{2}$.
+Похибка моделювання $\left[ \eta^{(q)} \right]^{2}$ дорівнює
+
+\begin{gather*}
+    \left[ \eta^{(q)} \right]^{2} = \left[ Y_{0}^{(q)} \right]^{T}Z\left( C^{T} \right)Y_{0}^{(q)},
+    Z\left( C^{T} \right)=I_{H_{0}\times H_{0}} - C\left( C^{T} C\right)^{+}C^{T}.
+\end{gather*}
+
+Загальна похибка моделювання дорівнює
+\begin{gather*}
+    \eta^{2} = \left[ \eta^{(0)} \right]^{2} + \left[ \eta^{(1)} \right]^{2} + \dots + \left[ \eta^{(q)} \right]^{2} + \dots
+\end{gather*}
+
+\textbf{Висновки}.
+Розглянуто нелінійну систему, яка функціонує у скінченій часовій області та нескінченій
+просторовій області.
+Отримано наближення нелінійної системи через нескінчену кількість лінійних систем.
+Для кожної з лінійних систем побудовано функції Гріна.
+Проведено моделювання розв'язків лінійних систем та отримано розв'язок початкової системи у вигляді ряду.
+Знайдено похибку моделювання для нелінійних систем, що функціонують у скінченій часовій області.
+
+\section{Задача моделювання динаміки нелінійної в малому системи з розподіленими параметрами у обмеженій
+просторовій області} \label{sec:sect2_3}
+
+Нехай система описується диференційним рівнянням з граничною умовою
+
+\begin{equation}
+    \label{eq:small_parameter_common_system_with_conditions}
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y(s) + \varepsilon P(y(s), \partial_x y(s), \partial_x^2 y(s)) = u(s), s\in S_{0}^T, \\
+        L^{\Gamma}(\partial^{2}_{x})y(s) = Y^{\Gamma}(s),s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+    \end{alignedat}
+    \right.
+\end{equation}
+де $s=(x,t)$, $x=(x_{1},\dots,x_{n})$, $S_{0}^{T}=S_{0}\times T_{0}$, $\partial_{x}=\left(
+\frac{\partial}{\partial x_{1}}, \dots, \frac{\partial}{\partial x_{n}} \right)$,
+$\partial^{2}_{x}=\left(\frac{\partial^{2}}{\partial x^{2}_{1}}, \dots, \frac{\partial^{2}}{\partial x^{2}_{n}} \right)$,
+$L(\partial_x^2, \partial_t)$, $L^{\Gamma}(\partial_{x})$ -- лінійні диференціальні оператори з постійними коефіцієнтами при похідних,
+$
+L(\partial_x^2, \partial_t)=\sum\limits_{ \substack{i,j=1\\ i\neq j}}\left(l_{1i} \frac{\partial^2}{\partial x^2_i} +
+l_{2i}\frac{\partial^2}{\partial x_{1i}
+    \partial x_{1j}} + l_{3i} \frac{\partial}{\partial x_i} \right) + l_4 \frac{\partial}{\partial t}
+$,
+$
+L^{\Gamma}(\partial_x^2)=\sum\limits_{ \substack{i,j=1\\ i\neq j}}\left(l^{\Gamma}_{1i} \frac{\partial^2}{\partial x^2_i} +
+l^{\Gamma}_{2i}\frac{\partial^2}{\partial x_{1i}
+    \partial x_{1j}} + l^{\Gamma}_{3i} \frac{\partial}{\partial x_i} \right)
+$,
+$l_{1i}$, $l_{2i}$, $l_{3i}$, $l_{4}\in\mathbb{R}$,
+$l^{\Gamma}_{1i}$, $l^{\Gamma}_{2i}$, $l^{\Gamma}_{3i}$,
+$P(y(s), \partial_x y(s), \partial_x^2 y(s))$ -- многочлен  своїх аргументів з постійними
+коефіцієнтами при похідних,  $\varepsilon$ – малий параметр, $\varepsilon\in [0; 0.01]$,
+$Y^{\Gamma}(x)\in\mathbb{C}^n$ -- задана функція, визначена в
+$\bigcup\limits_{\rho=1}^{R_{\Gamma}}\Gamma_{0\rho}\times T_{0}$;
+$\Gamma_{0\rho}\subseteq \Gamma_{0}$; $\Gamma_{0\rho}\cap\Gamma_{0\sigma} = \varnothing$;
+$\rho\neq\sigma$; $\rho,\sigma = 1,\dots,R_{\Gamma}$, $R_{\Gamma}\in\mathbb{N}$; $u(s)\in\mathbb{C}^n$ --
+задана функція, визначена в $S_{0}^{T}$, $S\subset S_{\infty}=\mathbb{R}^{n}$,
+$S_{0}$ -- зв'язна замкнена множина; $\Gamma$ -- границя області $S_{0}$, $k,n\in\mathbb{N}$, $T_{0}=[0;T]$,
+$T\in\mathbb{R}_{+}$.
+
+Використовуючи розглянуту вище методику, запишемо систему рівнянь
+
+\begin{gather*}
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0, s\in S_{0}^T, \\
+        L^{\Gamma}(\partial_{x})y^{(0)}(s) = Y^{\Gamma}(s),s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+    \end{alignedat}
+    \right.\\
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y^{(1)}(s) = - P_{1}\left[
+        y^{(0)}(s), \partial_x y^{(0)}(s), \partial_x^2 y^{(0)}(s)
+        \right], s\in S_{0}^T, \\
+        L^{\Gamma}(\partial_{x})y^{(1)}(s) = 0,s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+    \end{alignedat}
+    \right.\\
+    \dots\\
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y^{(q)}(s) = - P_{q}\left[
+            \underbrace{
+                ,\dots,
+                y^{(q-1)}(s), \partial_x y^{(q-1)}(s), \partial_x^2 y^{(q-1)}(s)
+            }_{3q}
+        \right], s\in S_{0}^T, \\
+        L^{\Gamma}(\partial_{x})y^{(q)}(s) = 0,s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+    \end{alignedat}
+    \right.
+\end{gather*}
+
+Розглянемо систему
+
+\begin{gather*}
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0, s\in S_{0}^T, \\
+        L^{\Gamma}(\partial_{x})y^{(0)}(s) = Y^{\Gamma}(s),s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+    \end{alignedat}
+    \right.\\
+\end{gather*}
+
+Нехай $y^{(0)}(s)=y^{(0)}_{\infty}(s) + y^{(0)}_{\Gamma}(s)$,
+де $y^{(0)}_{\Gamma}(s)$ -- функція, яку можемо виразити через фіктивні динамічні збурення
+$u^{(0)}_{\Gamma}(s')$, $s'=(x', t')$, $s'\in S^{T}_{\infty 0}=(S_{\infty} \textbackslash S_{0})\times T_{0}$,
+$y^{(0)}_{\Gamma}(s) = \int\limits_{S^{T}_{\infty 0}}G(s-s')\bigg|_{s\in S^{T}_{0}}u^{(0)}_{\Gamma}(s')ds'$,
+$y^{(0)}_{\infty}(s) = \int\limits_{S^{\infty}_{\infty}}G(s-s')\bigg|_{s\in S^{T}_{0}}u^{(0)}_{\Gamma}(s')ds'$,
+$ds'=dx'dt'$, де $G(s-s')$ -- функція Гріна для необмеженій просторово-часовій області, для рівняння
+$L(\partial^{2}_{x}, \partial_{t})y^{(0)}(s) - u(s) = 0$.
+
+Отримаємо інтегральне рівняння відносно $y^{(0)}_{\Gamma}(s)$.
+
+\begin{gather*}
+L^{\Gamma}(\partial_{x})y^{(0)}_{\infty}(s) + L^{\Gamma}(\partial_{x})y^{(0)}_{\Gamma}(s) = Y^{\Gamma}(s),
+s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0} \Leftrightarrow\\
+    \int\limits_{S^{\infty}_{\infty}}L^{\Gamma}(\partial_{x})G(s-s')u(s')ds' +\\
+    + \int\limits_{S^{T}_{\infty 0}}G(s-s')L^{\Gamma}(\partial_{x})u^{(0)}_{\Gamma}(s')ds' = Y^{\Gamma}(s),
+s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0}.
+\end{gather*}
+
+Дискретизуючи по змінній $s'$ та $s$, замінимо інтеграли інтегральними сумами, а  рівняння -- системою з $W_{\Gamma}$
+лінійних алгебраїчних рівнянь:
+
+\begin{equation}
+    \label{eq:small_parameter_common_system_with_conditions_in_descrete_dots}
+    \begin{alignedat}{2}
+    \sum_{\varphi=1}^{\Phi} L^{\Gamma}(\partial_{x})G(s_{w} - s'_{\varphi})
+    \bigg|_{\substack{
+    s_{w}\in
+    \bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0}\\
+    s'_{\varphi}\in S^{T}_{\infty 0}
+    }
+    }
+    u^{(0)}_{\Gamma}(s'_{\varphi})\Delta s'_{\varphi} =\\
+    = Y^{\Gamma}(s_{w})-\int\limits_{S^{\infty}_{\infty}} L^{\Gamma}(\partial_{x})G(s_{w}-s')
+    \bigg|_{s_{w}\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0}}u(s')ds',\\
+    s_{w}\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0}, w=1,2,\dots,W_{\Gamma}.
+    \end{alignedat}
+\end{equation}
+
+Запишемо систему (\ref{eq:small_parameter_common_system_with_conditions_in_descrete_dots}) у матричній формі
+
+\begin{gather*}
+    CU^{(0)}_{\Gamma} = Y^{(0)}_{\Gamma},\\
+    U^{(0)}_{\Gamma}=\left(str\left( u^{(0)}_{\Gamma}
+    (s'_{\varphi})\bigg|_{s'_{\varphi}\in S^{T}_{\infty 0}} \right) \varphi=1,\dots,\Phi \right)^{T}\\
+    Y^{(0)}_{\Gamma}=col\left(Y^{\Gamma}(s_{w})
+    -\int\limits_{S^{\infty}_{\infty}}L^{\Gamma}(\partial_{x})G(s_{w}-s')\bigg|_{s\in\Gamma^{T}_{0}}u(s')ds',
+    s_{w}\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0}
+    \right)\\
+    w=1,\dots,W_{\Gamma}\\
+    C=col\left( str\left(L^{\Gamma}(\partial_{x}) G(s_{w}-s'_{\varphi})
+    \bigg|_{\substack{
+        s_{w}\in
+        \bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0}\\
+        s'_{\varphi}\in S^{T}_{\infty 0}
+    }}
+    \right)\varphi=1,\dots,\Phi \right)\\
+    w=1,\dots,W_{\Gamma}
+\end{gather*}
+
+Отримаємо задачу псевдообернення системи лінійних алгебраїчних рівнянь.
+Позначимо $P_{1}=CC^{T}$, $P_{2}C^{T}C$.
+Запишемо її розв'язок.
+
+\begin{gather*}
+U^{(0)}_{\Gamma}\in\Omega_{U^{(0)}_{\Gamma}}=
+    \left\{ U^{(0)}_{\Gamma}:U^{(0)}_{\Gamma}=C^{T}P^{+}_{1}Y^{(0)}_{\Gamma}+I_{\Phi\times\Phi}\nu-C^{T}P^{+}_{1}C\nu \right\}
+\end{gather*}
+
+або
+
+\begin{gather*}
+    U^{(0)}_{\Gamma}\in\Omega_{U^{(0)}_{\Gamma}}=
+    \left\{ U^{(0)}_{\Gamma}:U^{(0)}_{\Gamma}=P^{+}_{2}C^{T}Y^{(0)}_{\Gamma}+I_{\Phi\times\Phi}\nu-P^{+}_{2}C^{T}C\nu \right\},
+\end{gather*}
+
+де $I_{\Phi\times\Phi}$ -- одинична матриця розміру $\Phi\times\Phi$, $\nu$-- довільний вектор розміру $\Phi$,
+$P^{+}_{1}$, $P^{+}_{2}$ -- матриці псевдообернені до $P_{1}$, $P_{2}$.
+
+Похибка моделювання $\left[ \eta^{(0)} \right]^{2}$ дорівнює
+
+\begin{gather*}
+    \left[ \eta^{(0)} \right]^{2}=\left[ Y^{(0)}_{\Gamma} \right]^T Z\left( C^{T} \right)Y^{(0)}_{\Gamma},
+    Z(C^{T})=I_{\Phi\times\Phi}-C\left( C^{T}C \right)^{+}C^{T}.
+\end{gather*}
+
+В загальному випадку, зводячи систему
+
+\begin{gather*}
+    \left\{
+    \begin{alignedat}{2}
+    L(\partial^{2}_{x}, \partial_{t})y^{(q)}(s)=-P_{q}
+    \left[
+        \underbrace{
+            ,\dots,
+            y^{(q-1)}(s), \partial_x y^{(q-1)}(s), \partial_x^2 y^{(q-1)}(s)
+        }_{3q}
+        \right],
+    s\in S^{T}_{0}, \\
+    L^{\Gamma}(\partial_{x})y^{(q)}(s)=0, \in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+    \end{alignedat}
+    \right.
+\end{gather*}
+
+до інтегрального вигляду та виконуючи дискретизацію, отримаємо
+
+\begin{gather*}
+    CU^{(q)}_{\Gamma} = Y^{(q)}_{\Gamma},\\
+    U^{(q)}_{\Gamma}=\left(str\left( u^{(q)}_{\Gamma}
+    (s'_{\varphi})\bigg|_{s'_{\varphi}\in S^{T}_{\infty 0}} \right) \varphi=1,\dots,\Phi \right)^{T}\\
+    Y^{(q)}_{\Gamma}=col\left(Y^{\Gamma}(s_{w})
+    -\int\limits_{S^{\infty}_{\infty}}L^{\Gamma}(\partial_{x})G(s_{w}-s')\bigg|_{s\in\Gamma^{T}_{0}}u(s')ds',
+    s_{w}\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0}
+    \right)\\
+    w=1,\dots,W_{\Gamma}\\
+    C=col\left( str\left(L^{\Gamma}(\partial_{x}) G(s_{w}-s'_{\varphi})
+    \bigg|_{\substack{
+        s_{w}\in
+        \bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0}\\
+        s'_{\varphi}\in S^{T}_{\infty 0}
+    }}
+    \right)\varphi=1,\dots,\Phi \right)\\
+    w=1,\dots,W_{\Gamma}
+\end{gather*}
+
+Маємо розв'язок системи
+
+\begin{gather*}
+    U^{(q)}_{\Gamma}\in\Omega_{U^{(q)}_{\Gamma}}=
+    \left\{ U^{(q)}_{\Gamma}:U^{(q)}_{\Gamma}=C^{T}P^{+}_{1}Y^{(q)}_{\Gamma}+I_{\Phi\times\Phi}\nu-C^{T}P^{+}_{1}C\nu \right\}
+\end{gather*}
+
+або
+
+\begin{gather*}
+    U^{(q)}_{\Gamma}\in\Omega_{U^{(q)}_{\Gamma}}=
+    \left\{ U^{(q)}_{\Gamma}:U^{(q)}_{\Gamma}=P^{+}_{2}C^{T}Y^{(q)}_{\Gamma}+I_{\Phi\times\Phi}\nu-P^{+}_{2}C^{T}C\nu \right\},
+\end{gather*}
+
+де $I_{\Phi\times\Phi}$ -- одинична матриця розміру $\Phi\times\Phi$, $\nu$-- довільний вектор розміру $\Phi$,
+$P^{+}_{1}$, $P^{+}_{2}$ -- матриці псевдообернені до $P_{1}$, $P_{2}$.
+
+Похибка моделювання $\left[ \eta^{(q)} \right]^{2}$ дорівнює
+
+\begin{gather*}
+    \left[ \eta^{(q)} \right]^{2}=\left[ Y^{(q)}_{\Gamma} \right]^T Z\left( C^{T} \right)Y^{(q)}_{\Gamma},
+    Z(C^{T})=I_{\Phi\times\Phi}-C\left( C^{T}C \right)^{+}C^{T}.
+\end{gather*}
+
+\textbf{Висновки}.
+Розглянуто нелінійну систему, яка функціонує у скінченій просторовій області та нескінченій
+часовій області.
+Отримано наближення нелінійної системи через нескінчену кількість лінійних систем.
+Для кожної з лінійних систем побудовано функції Гріна.
+Проведено моделювання розв'язків лінійних систем та отримано розв'язок початкової системи у вигляді ряду.
+Знайдено похибку моделювання для нелінійних систем, що функціонують у скінченій просторовій області.
+
+\section{Задача моделювання динаміки нелінійної в малому системи з розподіленими параметрами в обмежених
+просторово-часових областях} \label{sec:sect2_4}
+
+Нехай система ($\ref{eq:small_parameter_common_system_with_init_and_border_conditions}$) описується диференційним рівнянням з граничною  та початковою умовою
+
+\begin{equation}
+    \label{eq:small_parameter_common_system_with_init_and_border_conditions}
+    \left\{
+    \begin{alignedat}{2}
+        L(\partial_x^2, \partial_t)y(s) + \varepsilon P(y(s), \partial_x y(s), \partial_x^2 y(s)) = u(s), s\in S_{0}^T, \\
+        L^{0}(\partial_{t})y(x, 0) = Y^{0}(x), x\in\bigcup\limits_{r=1}^{R_{0}},t=0,\\
+        L^{\Gamma}(\partial^{2}_{x})y(s) = Y^{\Gamma}(s),s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+    \end{alignedat}
+    \right.
+\end{equation}
+де $s=(x,t)$, $x=(x_{1},\dots,x_{n})$, $S_{0}^{T}=S_{0}\times T_{0}$, $\partial_{x}=\left(
+\frac{\partial}{\partial x_{1}}, \dots, \frac{\partial}{\partial x_{n}} \right)$,
+$\partial^{2}_{x}=\left(\frac{\partial^{2}}{\partial x^{2}_{1}}, \dots, \frac{\partial^{2}}{\partial x^{2}_{n}} \right)$,
+$L(\partial_x^2, \partial_t)$, $L^{\Gamma}(\partial^2_{x})$, $L^{0}(\partial_{t})$ -- лінійні диференціальні оператори з постійними коефіцієнтами при похідних,
+$
+L(\partial_x^2, \partial_t)=\sum\limits_{ \substack{i,j=1\\ i\neq j}}\left(l_{1i} \frac{\partial^2}{\partial x^2_i} +
+l_{2i}\frac{\partial^2}{\partial x_{1i}
+    \partial x_{1j}} + l_{3i} \frac{\partial}{\partial x_i} \right) + l_4 \frac{\partial}{\partial t}
+$,
+$
+L^{0}(\partial_{t})=l^{0}_{1}\frac{\partial}{\partial t}
+$,
+$l^{0}_{1}\in\mathbb{R}$,
+$
+L^{\Gamma}(\partial_x^2)=\sum\limits_{ \substack{i,j=1\\ i\neq j}}\left(l^{\Gamma}_{1i} \frac{\partial^2}{\partial x^2_i} +
+l^{\Gamma}_{2i}\frac{\partial^2}{\partial x_{1i}
+    \partial x_{1j}} + l^{\Gamma}_{3i} \frac{\partial}{\partial x_i} \right)
+$,
+$l_{1i}$, $l_{2i}$, $l_{3i}$, $l_{4}\in\mathbb{R}$,
+$l^{\Gamma}_{1i}$, $l^{\Gamma}_{2i}$, $l^{\Gamma}_{3i}\in\mathbb{R}$,
+$P(y(s), \partial_x y(s), \partial_x^2 y(s))$ -- многочлен  своїх аргументів з постійними
+коефіцієнтами при похідних,  $\varepsilon$ – малий параметр, $\varepsilon\in [0; 0.01]$,
+$Y^{\Gamma}(x)\in\mathbb{C}^n$ -- задана функція, визначена в
+$\bigcup\limits_{\rho=1}^{R_{\Gamma}}\Gamma_{0\rho}\times T_{0}$;
+$\Gamma_{0\rho}\subseteq \Gamma_{0}$; $\Gamma_{0\rho}\cap\Gamma_{0\sigma} = \varnothing$;
+$\rho\neq\sigma$; $\rho,\sigma = 1,\dots,R_{\Gamma}$, $R_{\Gamma}\in\mathbb{N}$; $u(s)\in\mathbb{C}^n$ --
+задана функція, визначена в $S_{0}^{T}$, $S\subset S_{\infty}=\mathbb{R}^{n}$,
+$S_{0}$ -- зв'язна замкнена множина; $\Gamma$ -- границя області $S_{0}$, $k,n\in\mathbb{N}$, $T_{0}=[0;T]$,
+$T\in\mathbb{R}_{+}$.
+
+Використовуючи розглянуту вище методику, запишемо систему рівнянь
+\begin{gather*}
+    \left\{
+        \begin{alignedat}{2}
+            L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0, s\in S_{0}^T, \\
+            L^{0}(\partial_{t})y^{(0)}(x, 0) = Y^{0}(x), x\in\bigcup\limits_{r=1}^{R_{0}},t=0,\\
+            L^{\Gamma}(\partial^{2}_{x})y^{(0)}(s) = Y^{\Gamma}(s),s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+        \end{alignedat}
+    \right.\\
+    \dots\\
+    \left\{
+        \begin{alignedat}{2}
+            L(\partial_x^2, \partial_t)y^{(1)}(s) = - P_{1}\left[
+                y^{(0)}(s), \partial_x y^{(0)}(s), \partial_x^2 y^{(0)}(s)
+            \right], s\in S_{0}^T, \\
+            L^{0}(\partial_{t})y^{(1)}(x, 0) = 0, x\in\bigcup\limits_{r=1}^{R_{0}},t=0,\\
+            L^{\Gamma}(\partial^{2}_{x})y^{(1)}(s) = 0,s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+        \end{alignedat}
+    \right.\\
+    \dots\\
+    \left\{
+        \begin{alignedat}{2}
+            L(\partial_x^2, \partial_t)y^{(q)}(s) = \\
+            = - P_{q}\left[
+                         \underbrace{
+                             ,\dots,
+                             y^{(q-1)}(s), \partial_x y^{(q-1)}(s), \partial_x^2 y^{(q-1)}(s)
+                         }_{3q}
+            \right], s\in S_{0}^T, \\
+            L^{0}(\partial_{t})y^{(q)}(x, 0) = 0, x\in\bigcup\limits_{r=1}^{R_{0}},t=0,\\
+            L^{\Gamma}(\partial^{2}_{x})y^{(q)}(s) = 0,s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+        \end{alignedat}
+    \right.
+\end{gather*}
+
+
+Розглянемо систему ($\ref{eq:small_parameter_common_system_with_init_and_border_conditions_iteration_0}$)
+
+\begin{equation}
+    \label{eq:small_parameter_common_system_with_init_and_border_conditions_iteration_0}
+    \left\{
+        \begin{alignedat}{2}
+            L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0, s\in S_{0}^T, \\
+            L^{0}(\partial_{t})y^{(0)}(x, 0) = Y^{0}(x), x\in\bigcup\limits_{r=1}^{R_{0}},t=0,\\
+            L^{\Gamma}(\partial^{2}_{x})y^{(0)}(s) = Y^{\Gamma}(s),s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0},
+        \end{alignedat}
+    \right.
+\end{equation}
+
+Нехай $y^{(0)}(s) = y^{(0)}_{\infty}(s) + y^{(0)}_{0}(s) + y^{(0)}_{\Gamma}(s)$, де $y^{(0)}_{0}(s)$, $y^{(0)}_{\Gamma}(s)$ --
+функції, які можемо виразити через фіктивні динамічні збурення
+$u^{(0)}_{0}(s')$,
+$s=(x', t')$,
+$s'\in S_{\infty}^{\infty 0} = S_{\infty} \times (T_{\infty}\textbackslash T_{0})$,
+$y_{0}^{(0)}(s)=\int\limits_{S_{\infty}^{\infty 0}}G(s-s')\bigg|_{s\in S_{\infty}^{T}}u_{0}^{(0)}(s')ds'$,
+$y_{\infty}^{(0)}(s)=\int\limits_{S_{\infty}^{\infty}}G(s-s')\bigg|_{s\in S_{\infty}^{T}}u_{0}^{(0)}(s')ds'$,
+$ds'=dx'dt'$,
+та
+$u^{(0)}_{\Gamma}(s')$, $s'=(x', t')$, $s'\in S^{T}_{\infty 0}=(S_{\infty} \textbackslash S_{0})\times T_{0}$,
+$y^{(0)}_{\Gamma}(s) = \int\limits_{S^{T}_{\infty 0}}G(s-s')\bigg|_{s\in S^{T}_{0}}u^{(0)}_{\Gamma}(s')ds'$,
+$y^{(0)}_{\infty}(s) = \int\limits_{S^{\infty}_{\infty}}G(s-s')\bigg|_{s\in S^{T}_{0}}u^{(0)}_{\Gamma}(s')ds'$,
+де $G(s - s')$ -- функція Гріна для необмеженій просторово-часовій області, для рівняння $L(\partial_x^2, \partial_t)y^{(0)}(s) - u(s) = 0$.
+
+Отримаємо систему інтегральних рівнянь відносно $u^{(0)}_{0}(s')$ та $u^{(0)}_{\Gamma}(s')$
+\begin{gather*}
+    \left\{
+    \begin{alignedat}{2}
+        \int\limits_{S_{\infty}^{\infty 0}}L^{0}(\partial_{t})G(s-s')u_{0}^{(0)}(s')ds' =
+        Y^{0}(x)-\int\limits_{S_{\infty}^{\infty}} L^{0}(\partial_{t})G(s-s')u_{0}^{(0)}(s')ds',\\
+        x\in\bigcup\limits_{r=1}^{R_{0}} S_{0r},t=0.\\
+        \int\limits_{S^{\infty}_{\infty}}L^{\Gamma}(\partial_{x})G(s-s')u(s')ds' +\\
+        + \int\limits_{S^{T}_{\infty 0}}G(s-s')L^{\Gamma}(\partial_{x})u^{(0)}_{\Gamma}(s')ds' = Y^{\Gamma}(s),
+        s\in\bigcup\limits_{\rho=1}^{R_{\Gamma}} \Gamma_{0\rho}\times T_{0}.
+    \end{alignedat}
+    \right.
+\end{gather*}
+
+
+
+Виконаємо дискретизацію тільки по змінній $s$.Отримаємо
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Висновки}.
+Розглянуто нелінійну систему, яка функціонує у скінченій просторо-часовій області.
+Отримано наближення нелінійної системи через нескінчену кількість лінійних систем.
+Для кожної з лінійних систем побудовано функції Гріна.
+Проведено моделювання розв'язків лінійних систем та отримано розв'язок початкової системи у вигляді
+ряду.
+Знайдено похибку моделювання для нелінійних систем, що функціонують у скінченій просторово-часовій області.
+
+
+\section*{Висновки до другого розділу}
+\addcontentsline{toc}{section}{Висновки до другого розділу}
+
+Розглянуто нелінійні системи, які функціонують у нескінченій області, в обмеженій часовій області, обмеженій
+просторовій області та скінченій просторово-часовій області.
+
+Отримано наближення нелінійної системи через нескінчену кількість лінійних систем.
+
+Запропонована методика моделювання дії початково-крайових умов за допомогою фіктивних функцій, які визначені за
+межами області пошуку розв'язків.
+
+Побудовані множини що моделюють функцій для різних видів дискретизації початково-крайових умов, а також для
+випадку обмеженій тільки в часовій області та обмеженій тільки в просторовій області.
+
+Для кожної з лінійних систем, які моделюють стан нелінійної системи, побудовано функції Гріна.
+
+Проведено моделювання розв'язків лінійних систем та отримано розв'язок початкової системи у вигляді ряду.
+
+Знайдено похибку моделювання для нелінійних систем, що функціонують у скінченій просторово-часовій області.

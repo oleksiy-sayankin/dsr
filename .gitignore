@@ -1,0 +1,13 @@
+*.idea
+__pycache_
+*.pdf 
+*.aux 
+*.log 
+*.toc 
+*.lof 
+*.backup 
+*.fdb_latexmk 
+*.out 
+*.bbl 
+*.fls 
+*.kilepr_

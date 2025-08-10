@@ -1,0 +1,12 @@
+\makeatletter
+\renewcommand\listoffigures{%
+  \null\hfill\textbf{\MakeUppercase\listfigurename}\hfill\null\par
+  \@mkboth{\MakeUppercase\listfigurename}{\MakeUppercase\listfigurename}
+  \@starttoc{lof}%
+}
+\makeatother
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures

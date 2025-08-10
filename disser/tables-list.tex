@@ -1,0 +1,15 @@
+\makeatletter
+\renewcommand\listoftables{%
+  \null\hfill\textbf{\MakeUppercase\listtablename}\hfill\null\par
+  \@mkboth{\MakeUppercase\listfigurename}{\MakeUppercase\listfigurename}
+  \@starttoc{lot}%
+}
+\makeatother
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+\newpage
+
